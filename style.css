@@ -2,108 +2,42 @@
     --primary: #6366f1;
     --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
     --bg: #f8fafc;
-    --card-bg: #ffffff;
     --text-main: #1e293b;
     --text-sub: #64748b;
-    --radius: 16px;
+    --radius: 20px;
 }
 
-body {
-    background-color: var(--bg);
-    color: var(--text-main);
-    margin: 0;
-    font-family: sans-serif;
-}
-
+body { background: var(--bg); color: var(--text-main); margin: 0; font-family: 'Helvetica Neue', Arial, sans-serif; }
 .container { padding: 20px; max-width: 1200px; margin: 0 auto; }
 
-/* --- Header --- */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* これで子要素が縦に伸びるのを防ぎます */
-    background: white;
-    padding: 20px 30px;
-    border-radius: var(--radius);
-    margin-bottom: 25px;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-}
+/* Header & Icons */
+.header { display: flex; justify-content: space-between; align-items: center; background: white; padding: 15px 25px; border-radius: var(--radius); margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.logo-area { display: flex; align-items: center; gap: 15px; }
+.logo-icon { width: 65px; height: 65px; background: var(--accent-gradient); color: white; font-size: 32px; display: flex; align-items: center; justify-content: center; border-radius: 18px; }
 
-.logo-area { display: flex; align-items: center; gap: 20px; }
+/* Buttons */
+.nav-group { display: flex; gap: 12px; align-items: center; }
+.nav-btn { text-decoration: none; background: #f1f5f9; color: var(--text-main); padding: 10px 18px; border-radius: 12px; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 8px; height: fit-content; transition: 0.2s; border: none; }
+.class-display { border: 2px solid var(--primary); color: var(--primary); background: white; }
 
-/* 2. アイコンを大きく設定 */
-.logo-icon {
-    width: 65px;
-    height: 65px;
-    background: var(--accent-gradient);
-    color: white;
-    font-size: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 18px;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-}
+/* Cards & Grid */
+.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
+.card { background: white; padding: 25px; border-radius: var(--radius); box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
+.theme-orange-card { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); background: #f97316; }
 
-.nav-group { display: flex; gap: 15px; align-items: center; }
+/* List & Lists */
+.schedule-list { list-style: none; padding: 0; margin-top: 15px; }
+.schedule-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f1f5f9; }
+.todo-list { list-style: none; padding: 0; margin-top: 15px; max-height: 200px; overflow-y: auto; }
+.todo-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; }
 
-/* ボタンが縦に伸びないための設定 */
-.nav-btn {
-    text-decoration: none;
-    background: #f1f5f9;
-    color: var(--text-main);
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 14px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    height: fit-content; /* 高さを中身に合わせる */
-    transition: 0.2s;
-}
+/* Timer Bar */
+.timer-bar-container { width: 100%; height: 10px; background: #e2e8f0; border-radius: 10px; margin: 20px 0; overflow: hidden; }
+.timer-bar-fill { height: 100%; width: 100%; background: var(--primary); transition: width 1s linear; }
 
-.nav-btn:hover { background: #e2e8f0; }
-.class-display { background: #e0e7ff; color: var(--primary); }
-
-/* --- Dashboard --- */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    padding: 24px;
-    border-radius: var(--radius);
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-}
-
-/* 4. タイマーバーのスタイル */
-.timer-bar-container {
-    width: 100%;
-    height: 8px;
-    background: #e2e8f0;
-    border-radius: 10px;
-    margin: 20px 0;
-    overflow: hidden;
-}
-
-.timer-bar-fill {
-    height: 100%;
-    width: 100%;
-    background: var(--accent-gradient);
-    transition: width 1s linear;
-}
-
-.timer-display { font-size: 3rem; font-weight: bold; text-align: center; color: var(--primary); }
-.pomo-btn { width: 100%; padding: 12px; border: none; border-radius: 10px; background: var(--primary); color: white; cursor: pointer; font-weight: bold; }
-
-/* その他装飾用 */
-.icon-box { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px; color: white; }
+/* Icons Boxes */
+.icon-box { width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; }
 .theme-red { background: #ef4444; }
 .theme-blue { background: #3b82f6; }
 .theme-green { background: #10b981; }
-.card-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.card-title { display: flex; align-items: center; font-weight: bold; }
+.theme-orange { background: #f59e0b; }
