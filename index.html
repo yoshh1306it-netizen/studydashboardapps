@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="logo-text">
+                <h1>Study Dashboard</h1>
+                <p id="greeting-message">今日も頑張りましょう！</p>
+            </div>
+        </div>
+        <div class="header-controls">
+            <div class="current-class-display">
+                <i class="fas fa-users"></i>
+                <span id="header-class-name">21HR</span>
+            </div>
+            
+            <a href="settings.html" class="btn btn-outline">
+                <i class="fas fa-cog"></i> 設定
+            </a>
+
+            <a href="admin.html" class="btn btn-outline">
+                <i class="fas fa-user-shield"></i> 管理者画面
+            </a>
+        </div>
+    </header>
+
+    <main class="dashboard-grid">
+        <div class="card time-card">
+            <div class="card-header">
+                <i class="far fa-clock"></i> 現在時刻
+            </div>
+            <div class="time-display" id="current-time">00:00:00</div>
+            <div class="date-display" id="current-date">2026年1月1日 (月)</div>
+        </div>
+
+        <div class="card next-class-card">
+            <div class="card-header">
+                <i class="fas fa-book-open"></i> 次の授業
+            </div>
+            <div class="next-class-content">
+                <h2 id="next-subject">読み込み中...</h2>
+                <div class="next-class-info">
+                    <span id="next-period"></span>
+                    <span id="time-remaining" class="badge"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card schedule-card">
+            <div class="card-header-row">
+                <div class="card-header">
+                    <i class="far fa-calendar-alt"></i> 今日の時間割
+                </div>
+                <span id="schedule-day" class="badge-light"></span>
+            </div>
+            <div class="schedule-list" id="schedule-list">
+                </div>
+        </div>
+
+        <div class="right-column">
+            <div class="card test-card" id="test-card">
+                <div class="card-header">
+                    <i class="fas fa-bullseye"></i> 次のテストまで
+                </div>
+                <div class="test-content">
+                    <h3 id="test-name">予定なし</h3>
+                    <div id="test-countdown" class="countdown"></div>
+                </div>
+            </div>
+
+            <div class="tools-grid">
+                <div class="card tool-card">
+                    <div class="card-header">
+                        <i class="fas fa-stopwatch"></i> ポモドーロ
+                    </div>
+                    <div class="pomodoro-container">
+                        <div class="timer-display" id="pomodoro-timer">25:00</div>
+                        <div class="timer-bar-container">
+                            <div class="timer-bar-fill" id="timer-bar"></div>
+                        </div>
+                        <div class="timer-status" id="timer-status">25分集中</div>
+                        <div class="timer-controls">
+                            <button id="timer-toggle" class="btn btn-primary btn-full">
+                                <i class="fas fa-play"></i> 開始
+                            </button>
+                            <button id="timer-reset" class="btn btn-icon">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card tool-card">
+                    <div class="card-header-row">
+                        <div class="card-header">
+                            <i class="fas fa-list-ul"></i> ToDoリスト
+                        </div>
+                        <span id="todo-count" class="text-small">0/0 完了</span>
+                    </div>
+                    <div class="todo-input-group">
+                        <input type="text" id="todo-input" placeholder="新しいタスクを追加...">
+                        <button id="add-todo" class="btn-small"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <ul class="todo-list" id="todo-list">
+                        <li class="empty-state">タスクがありません</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="data.json"></script>
+    <script src="script.js"></script>
+</body>
+</html>
