@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人設定 - Study Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .settings-container { max-width: 600px; margin: 0 auto; }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <header>
+            <div class="logo-section">
+                <div class="logo-text">
+                    <h1>個人設定</h1>
+                    <p>あなたの情報を設定してください</p>
+                </div>
+            </div>
+            <a href="index.html" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> 戻る
+            </a>
+        </header>
+
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-user-tag"></i> クラス選択
+            </div>
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label style="display:block; margin-bottom:10px;">所属クラスを選択してください</label>
+                <select id="class-selector" style="width:100%; padding:12px; border-radius:8px; border:1px solid #d1d5db;">
+                    <option value="21HR">21HR</option>
+                    <option value="22HR">22HR</option>
+                    <option value="23HR">23HR</option>
+                    <option value="24HR">24HR</option>
+                    <option value="25HR">25HR</option>
+                    <option value="26HR">26HR</option>
+                    <option value="27HR">27HR</option>
+                    <option value="28HR">28HR</option>
+                </select>
+            </div>
+
+            <button id="save-settings" class="btn btn-primary btn-full">
+                <i class="fas fa-check"></i> 設定を保存
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-database"></i> データ管理
+            </div>
+            <button class="btn btn-outline btn-full" onclick="localStorage.clear(); location.reload();">
+                <i class="fas fa-trash-alt"></i> データを初期化
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedClass = localStorage.getItem('selectedClass') || '21HR';
+            const selector = document.getElementById('class-selector');
+            selector.value = savedClass;
+
+            document.getElementById('save-settings').addEventListener('click', () => {
+                localStorage.setItem('selectedClass', selector.value);
+                // 簡易的な設定保存
+                const settings = { class: selector.value };
+                localStorage.setItem('dashboardSettings', JSON.stringify(settings));
+                
+                alert('設定を保存しました');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
