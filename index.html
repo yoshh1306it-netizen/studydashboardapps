@@ -13,14 +13,13 @@
             <div class="logo-area">
                 <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
                 <div>
-                    <h2 style="margin:0; font-size:1.6em;">Study Dashboard</h2>
-                    <small id="greeting-message" style="color:var(--text-sub)">今日も頑張りましょう！</small>
+                    <h2 style="margin:0; font-size:1.6em; line-height:1.1;">Study Dashboard</h2>
+                    <small id="greeting-message" style="color:var(--text-sub); display:block; margin-top:-4px;">読み込み中...</small>
                 </div>
             </div>
-            
             <div class="nav-group">
                 <div class="nav-btn class-display" id="userClassDisplay">
-                    <i class="fas fa-users"></i> <span>読込中...</span>
+                    <i class="fas fa-users"></i> <span>21HR</span>
                 </div>
                 <a href="settings.html" class="nav-btn"><i class="fas fa-cog"></i> 設定</a>
                 <a href="admin.html" class="nav-btn"><i class="fas fa-user-shield"></i> 管理者画面</a>
@@ -35,12 +34,12 @@
             </div>
 
             <div class="card next-class-card">
-                <div class="badge-title">
+                <div class="card-title">
                     <div class="icon-box theme-green"><i class="fas fa-book-open"></i></div>
                     次の授業
                 </div>
-                <div class="subject-large" id="nextClassSubject">読み込み中...</div>
-                <div id="nextClassTime">--:--</div>
+                <div class="subject-large" id="nextClassSubject">授業なし</div>
+                <div id="nextClassTime" style="color:var(--text-sub);">--:--</div>
             </div>
 
             <div class="card schedule-card">
@@ -49,30 +48,48 @@
                         <div class="icon-box theme-blue"><i class="far fa-calendar-alt"></i></div>
                         今日の時間割
                     </div>
-                    <span id="scheduleDay">-曜日</span>
+                    <span id="scheduleDay" style="color:var(--text-sub)">-曜日</span>
                 </div>
                 <ul class="schedule-list" id="scheduleList"></ul>
             </div>
 
+            <div class="card test-card theme-orange-card">
+                <div class="card-title" style="color:white;">
+                    <div class="icon-box" style="background:rgba(255,255,255,0.2);"><i class="fas fa-bullseye"></i></div>
+                    次のテストまで
+                </div>
+                <h2 id="testName" style="color:white; margin:10px 0;">学年末考査</h2>
+                <div class="countdown-timer" id="testTimer" style="font-size:2em; font-weight:bold; color:white;">あと -- 日</div>
+            </div>
+
             <div class="card tool-card">
-                <div class="card-header-flex">
-                    <div class="card-title">
-                        <div class="icon-box theme-red"><i class="fas fa-stopwatch"></i></div>
-                        ポモドーロ
-                    </div>
+                <div class="card-title">
+                    <div class="icon-box theme-red"><i class="fas fa-stopwatch"></i></div>
+                    ポモドーロ
                 </div>
                 <div class="timer-display" id="pomoTimer">25:00</div>
-                
                 <div class="timer-bar-container">
                     <div class="timer-bar-fill" id="timerBar"></div>
                 </div>
+                <button class="pomo-btn" id="pomoBtn">開始</button>
+            </div>
 
-                <button class="pomo-btn" id="pomoBtn"><i class="fas fa-play"></i> 開始</button>
+            <div class="card todo-card">
+                <div class="card-header-flex">
+                    <div class="card-title">
+                        <div class="icon-box theme-orange"><i class="fas fa-list"></i></div>
+                        ToDoリスト
+                    </div>
+                    <span id="todoCount" style="font-size:12px; color:var(--text-sub);">0/0</span>
+                </div>
+                <div class="todo-input-group">
+                    <input type="text" id="newTodo" class="todo-input" placeholder="タスクを追加...">
+                    <button id="addTodoBtn" class="add-btn">+</button>
+                </div>
+                <ul class="todo-list" id="todoList"></ul>
             </div>
         </div>
     </div>
-
-    <script src="data.json"></script>
     <script src="script.js"></script>
 </body>
 </html>
