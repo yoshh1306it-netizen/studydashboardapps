@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理者設定 - Study Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .admin-container { max-width: 800px; margin: 0 auto; }
+        .tab-menu { display: flex; margin-bottom: 20px; border-bottom: 2px solid #e5e7eb; }
+        .tab-btn { padding: 10px 20px; border: none; background: none; font-weight: bold; color: #6b7280; cursor: pointer; }
+        .tab-btn.active { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); margin-bottom: -2px; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 0.9rem; }
+        .form-input { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <header>
+            <div class="logo-section">
+                <a href="index.html" style="text-decoration:none; display:flex; gap:10px; align-items:center;">
+                    <div class="logo-icon" style="width:40px; height:40px; font-size:20px;">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1 style="font-size:1.2rem;">管理者設定</h1>
+                        <p>学校全体の設定を管理します</p>
+                    </div>
+                </a>
+            </div>
+            <a href="index.html" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> ダッシュボードに戻る
+            </a>
+        </header>
+
+        <div class="card">
+            <div class="tab-menu">
+                <button class="tab-btn active">時間割</button>
+                <button class="tab-btn">時限設定</button>
+                <button class="tab-btn">テスト</button>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">クラス選択</label>
+                <select class="form-input" id="admin-class-select">
+                    <option value="21HR">21HR</option>
+                    <option value="22HR">22HR</option>
+                    <option value="23HR">23HR</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">曜日選択</label>
+                <select class="form-input">
+                    <option value="Mon">月曜日</option>
+                    <option value="Tue">火曜日</option>
+                    <option value="Wed">水曜日</option>
+                    <option value="Thu">木曜日</option>
+                    <option value="Fri">金曜日</option>
+                </select>
+            </div>
+
+            <div id="subject-inputs">
+                <div class="form-group">
+                    <label class="form-label">1限目</label>
+                    <input type="text" class="form-input" value="国語">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">2限目</label>
+                    <input type="text" class="form-input" value="数学">
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-full">
+                <i class="fas fa-save"></i> 時間割を保存
+            </button>
+        </div>
+    </div>
+</body>
+</html>
