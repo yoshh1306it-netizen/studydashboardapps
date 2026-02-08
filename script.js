@@ -1,67 +1,87 @@
-// --- 3. 時間帯に合わせた挨拶 ---
-function updateGreeting() {
-    const hour = new Date().getHours();
-    const greetingEl = document.getElementById('greeting-message');
-    let message = "今日も頑張りましょう！";
-
-    if (hour >= 5 && hour < 11) message = "おはようございます！今日も一日頑張りましょう。";
-    else if (hour >= 11 && hour < 17) message = "こんにちは！午後の授業も集中して取り組みましょう。";
-    else if (hour >= 17 && hour < 22) message = "こんばんは！今日の復習は終わりましたか？";
-    else message = "遅くまでお疲れ様です。無理せず早めに休みましょうね。";
-
-    greetingEl.textContent = message;
-}
-
-// --- 時計 ---
-function initClock() {
-    setInterval(() => {
-        const now = new Date();
-        document.getElementById('clockTime').textContent = now.toLocaleTimeString('ja-JP');
-        document.getElementById('clockDate').textContent = now.toLocaleDateString('ja-JP');
-    }, 1000);
-}
-
-// --- 4. ポモドーロタイマー（バー連動） ---
-let timer;
-let timeLeft = 25 * 60;
-const totalTime = 25 * 60;
-let isRunning = false;
-
-function initPomodoro() {
-    const btn = document.getElementById('pomoBtn');
-    const display = document.getElementById('pomoTimer');
-    const bar = document.getElementById('timerBar');
-
-    btn.addEventListener('click', () => {
-        if (isRunning) {
-            clearInterval(timer);
-            btn.innerHTML = '<i class="fas fa-play"></i> 開始';
-        } else {
-            timer = setInterval(() => {
-                timeLeft--;
-                const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-                const s = (timeLeft % 60).toString().padStart(2, '0');
-                display.textContent = `${m}:${s}`;
-                
-                // バーの長さを更新
-                bar.style.width = (timeLeft / totalTime * 100) + "%";
-
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    alert("お疲れ様でした！休憩しましょう。");
-                }
-            }, 1000);
-            btn.innerHTML = '<i class="fas fa-pause"></i> 一時停止';
-        }
-        isRunning = !isRunning;
-    });
-}
-
-// 初期化
+// --- 初期設定とデータ読み込み ---
 document.addEventListener('DOMContentLoaded', () => {
     updateGreeting();
     initClock();
+    initTodo();
     initPomodoro();
-    // 挨拶を1時間ごとに更新
-    setInterval(updateGreeting, 3600000);
+    updateCountdown();
+    // 本来はdata.jsonをfetchするが、ここではモックとして動作
+    renderSchedule(); 
 });
+
+// 1. 挨拶機能
+function updateGreeting() {
+    const hour = new Date().getHours();
+    const msg = document.getElementById('greeting-message');
+    if (hour >= 5 && hour < 11) msg.textContent = "おはようございます！今日も一日頑張りましょう。";
+    else if (hour >= 11 && hour < 17) msg.textContent = "こんにちは！午後の授業も集中しましょう。";
+    else msg.textContent = "こんばんは！今日もお疲れ様でした。";
+}
+
+// 2. 時計
+function initClock() {
+    const update = () => {
+        const now = new Date();
+        document.getElementById('clockTime').textContent = now.toLocaleTimeString('ja-JP');
+        document.getElementById('clockDate').textContent = now.toLocaleDateString('ja-JP', { year:'numeric', month:'long', day:'numeric', weekday:'short' });
+    };
+    setInterval(update, 1000);
+    update();
+}
+
+// 3. ToDoリスト
+function initTodo() {
+    const input = document.getElementById('newTodo');
+    const btn = document.getElementById('addTodoBtn');
+    const list = document.getElementById('todoList');
+
+    btn.onclick = () => {
+        if (!input.value) return;
+        const li = document.createElement('li');
+        li.className = 'todo-item';
+        li.innerHTML = `<input type="checkbox"> <span>${input.value}</span>`;
+        list.appendChild(li);
+        input.value = '';
+    };
+}
+
+// 4. カウントダウン (例: 2026年3月2日)
+function updateCountdown() {
+    const target = new Date('2026-03-02').getTime();
+    const now = new Date().getTime();
+    const diff = target - now;
+    const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    document.getElementById('testTimer').textContent = `あと ${days} 日`;
+}
+
+// 5. ポモドーロ (簡易版)
+function initPomodoro() {
+    let timeLeft = 25 * 60;
+    let timerId = null;
+    const btn = document.getElementById('pomoBtn');
+    const bar = document.getElementById('timerBar');
+
+    btn.onclick = () => {
+        if (timerId) {
+            clearInterval(timerId);
+            timerId = null;
+            btn.textContent = "開始";
+        } else {
+            btn.textContent = "停止";
+            timerId = setInterval(() => {
+                timeLeft--;
+                const m = Math.floor(timeLeft / 60);
+                const s = timeLeft % 60;
+                document.getElementById('pomoTimer').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+                bar.style.width = (timeLeft / (25*60) * 100) + "%";
+            }, 1000);
+        }
+    };
+}
+
+function renderSchedule() {
+    const list = document.getElementById('scheduleList');
+    const subjects = ["数学", "論理国語", "古典探求", "物理", "体育", "化学", "LHR"];
+    document.getElementById('scheduleDay').textContent = "月曜日";
+    list.innerHTML = subjects.map((s, i) => `<li class="schedule-item"><span>${i+1}限</span><strong>${s}</strong></li>`).join('');
+}
